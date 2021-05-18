@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>RBAC</title>
+		<meta charset="utf-8">
+		<link href="/Public/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+		<link href="/Public/bootstrap/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" />
+		<link href="/Public/Home/css/page.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/Public/bootstrap/js/bootstrap.min.js"></script> 
+		<script type="text/javascript" src="/Public/Home/js/jquery.form.js"></script>
+		<script type="text/javascript" src="/Public/Home/js/uploadify/jquery.uploadify.min.js"></script>
+		<script type="text/javascript" src="/Public/Home/js/upload.js?2?=3"></script>
+		<style type="text/css">
+		.faceimgup_show_box,#faceimgup-queue{ display:none; }
+		#faceimgup_show{ max-width:200px; max-height:120px; }
+		</style>
+	</head>
+
+	<body style="margin: 5px; font-size: 13px; ">
+
+		<h3 style="display: none;">工具包管理</h3>
+		<div class="panel panel-default searchBox" style="margin-bottom: 5px;">
+			<div class="panel-body">
+				<a class="btn btn-info btn-sm pull-right" href="javascript:history.back()">返回</a> 
+				<div class="form-inline"><label>编辑工具包信息</label></div>
+			</div>
+		</div>
+   
+		<form id="ajaxForm" class="form-horizontal">
+			<div class="form-group">
+				<label for="title" class="col-sm-2 control-label">工具包名</label>
+				<div class="col-sm-10">
+					<input type="email" name="title" class="form-control" id="title" value="{$info.title}" placeholder="moBpx">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="type" class="col-sm-2 control-label">类别</label>
+				<div class="col-sm-4">
+					<select name="type" id="type" class="form-control">  
+					<option value="">==选择类别==</option>
+					<volist name="tpList" id="tp">
+						<option value="{$tp.id}" <if condition="$info['type'] eq $tp['id']"> selected="selected" </if> >{$tp.title}术式盒</option>
+					</volist>
+					</select>
+				</div> 
+			</div>
+			<div class="form-group">
+				<label for="peizhi" class="col-sm-2 control-label">配置</label>
+				<div class="col-sm-4">
+					<select name="peizhi" id="peizhi" class="form-control">
+					<option value="">==选择配置==</option>
+					<volist name="pzList" id="pz">
+						<option value="{$pz.id}" <if condition="$info['peizhi'] eq $pz['id']"> selected="selected" </if> >{$pz.title}</option>
+					</volist>
+					</select>
+				</div>
+				<div class="col-sm-4" id="cate2box"></div>
+			</div>
+			<div class="form-group">
+				<label for="keshi" class="col-sm-2 control-label">科室/术式</label>
+				<div class="col-sm-4">
+					<select name="keshi" id="keshi" class="form-control">
+					<option value="">==选择科室==</option>
+					<volist name="ksList" id="kli">
+						<option value="{$kli.id}" <if condition="$info['keshi'] eq $kli['id']"> selected="selected" </if> >{$kli.title}</option>
+					</volist>
+					</select>
+				</div>
+				<div class="col-sm-4" id="ssbox"></div>
+			</div>
+			<div class="form-group">
+				<label for="faceimg" class="col-sm-2 control-label">封面图片	</label>
+				<div class="col-sm-10">
+					<input type="file" name="faceimgup" class="form-control" id="faceimgup" placeholder="封面图片">
+				</div>
+			</div>
+			<div class="form-group faceimgup_show_box" <if condition="$info['faceimg'] neq ''"> style="display:block" </if>>
+				<label for="faceimg" class="col-sm-2 control-label">封面图片展示</label>
+				<div class="col-sm-10">
+					<input type="hidden" name="faceimg" class="form-control" id="faceimg" value="{$info['faceimg']}" />
+					<img id="faceimgup_show" src="{$info['faceimg']}" >
+				</div>
+			</div>
+			<input type="hidden" id="id" name="id" value="{$info['id']}" />
+		</form> 
+		<div class="modal-footer">
+			<button type="button" class="btn btn-sm btn-default"  onclick="javascriptL:history.back();">关闭</button>
+			<button type="button" class="btn btn-sm btn-info" id="subBtn">保存</button>
+		</div>
+
+		<script>
+			$(function() { 
+				initUploadify({ ID:'faceimgup',url:"/Home/Ziyuan/upload/folder/ziyuanimg",success:function(obj){ 
+				    if(obj.s){ 
+				      $('#faceimg').val(obj.d);
+				      $('#faceimgup_show').attr('src',obj.d);
+				      $('.faceimgup_show_box').fadeIn(); 
+				    }else{
+				      alert(obj.m);
+				    }
+				  } 
+				});
+				$('#subBtn').click(function() {
+					var options = {
+						url: '/index.php/Home/Package/save',
+						type: 'post',
+						dataType: 'json',
+						success: function(d) {
+							alert(d.m);
+							if(d.s){
+								location.href="/Home/Package/index";
+							}
+						}
+					};
+					$('#ajaxForm').ajaxSubmit(options);
+				});
+			});
+				
+		</script>
+	</body>
+
+</html>
+ 

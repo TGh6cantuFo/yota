@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>RBAC</title>
+		<meta charset="utf-8">
+		<link href="/Public/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+		<link href="/Public/bootstrap/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" />
+		<link href="/Public/Home/css/page.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/Public/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/Public/Home/js/jquery.form.js"></script>
+		<script type="text/javascript" src="/Public/Home/js/uploadify/jquery.uploadify.min.js"></script> 
+		
+		<script type="text/javascript" src="/Public/Home/js/upload.js?23"></script>
+		<style type="text/css">
+		.face_img_show_box,.imglist_show_box,#fade_img_select-queue,#imglist-queue{ display:none; }
+			#face_img_show{ max-width:120px; max-height:60px; }
+			#imglist_show{}
+			#imglist_show span{ display: inline-block; width:120px; height:80px; text-align: center; position: relative; background-position: center; background-size: contain; background-repeat: no-repeat; overflow: hidden; border:1px #ccc solid; margin:5px; border-radius:5px; } 
+			#imglist_show span a{ position: absolute; display: inline-block; width:100%; bottom:0px; left:0px; background-color:rgba(0,0,0,0.5); color:#ff0000;  }
+		</style>
+	</head>
+
+	<body style="margin: 5px; font-size: 13px; ">
+
+		<h3 style="display: none;">商品管理</h3>
+		<div class="panel panel-default searchBox" style="margin-bottom: 5px;">
+			<div class="panel-body">
+				<a class="btn btn-info btn-sm pull-right" href="javascript:history.back()">返回</a> 
+				<div class="form-inline"><label>编辑商品信息</label></div>
+			</div>
+		</div>
+  
+		<form id="ajaxForm" class="form-horizontal">
+			<input type="hidden" id="id" name="id" value="{$info.id}" />
+			<div class="form-group">
+				<label for="title" class="col-sm-2 control-label">商品名称</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="title" name="title" value="{$info['title']}" placeholder="商品名称">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPassword3" class="col-sm-2 control-label">所属分类</label>
+				<div class="col-sm-4">
+					<select id="category" name="category" class="form-control">
+						<volist name="catList" id="cat">
+							<option value="{$cat.id}" <if condition="$info['category'] eq $cat['id']">selected="selected"</if> >{$cat.title}</option>
+						</volist>
+					</select>
+				</div>
+				<div class="col-sm-4" id="subBox">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="model" class="col-sm-2 control-label">型号</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="model" name="model" value="{$info['model']}" placeholder="型号">
+				</div>
+				<label for="kucun" class="col-sm-2 control-label">库存	</label>
+				<div class="col-sm-4">
+					<input type="number" class="form-control" id="kucun" name="kucun" value="{$info['kucun']}" placeholder="库存">
+				</div> 
+			</div>
+			<div class="form-group">
+				<label for="material" class="col-sm-2 control-label">材质</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="material" name="material" value="{$info['material']}" placeholder="材质">
+				</div> 
+				<label for="technics" class="col-sm-2 control-label">工艺	</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="technics" name="technics" value="{$info['technics']}" placeholder="工艺">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="price" class="col-sm-2 control-label">零售价</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="price" name="price" value="{$info['price']}" placeholder="零售价">
+				</div> 
+				<label for="d_price" class="col-sm-2 control-label">术式盒优惠价</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="d_price" name="d_price" value="{$info['d_price']}" placeholder="术式盒优惠价">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="dprice" class="col-sm-2 control-label">代理进货价</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="dprice" name="dprice" value="{$info['dprice']}" placeholder="代理进货价">
+				</div> 
+				<label for="d_dprice" class="col-sm-2 control-label">代理进货优惠价格</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="d_dprice" name="d_dprice" value="{$info['d_dprice']}" placeholder="代理进货优惠价格">
+				</div>
+			</div>  
+			<div class="form-group">
+				<label for="fade_img" class="col-sm-2 control-label">封面图片	</label>
+				<div class="col-sm-10">
+					<input type="file" class="form-control" id="fade_img_select" placeholder="封面图片">
+				</div>
+			</div>
+			<div class="form-group face_img_show_box"  <if condition="$info['face_img'] neq ''" > style="display:inline;"</if>>
+				<label for="fade_img" class="col-sm-2 control-label">封面图片展示</label>
+				<div class="col-sm-10">
+					<input type="hidden" name="face_img" id="face_img" value="{$info['face_img']}" />
+					<img id="face_img_show" src="{$info['face_img']}" />
+				</div>
+			</div>
+			<div class="form-group" >
+				<label for="fade_img" class="col-sm-2 control-label">工作端图片	</label>
+				<div class="col-sm-10">
+					<input type="file" id="imglist" class="form-control" multiple id="image_select" placeholder="封面图片">
+				</div>
+			</div>
+			<div class="form-group imglist_show_box" <if condition="$info['image']" > style="display:block;" </if>>
+				<label for="fade_img" class="col-sm-2 control-label">工作端图片展示</label>
+				<div class="col-sm-10" id="imglist_show" >  
+					<input type="hidden" name="image" id="image" value="{$info['image']}" />
+					<volist name="imgList" id="img">
+					<span d_img="{$img}" style="background-image: url({$img})"> 
+						<a href="javascript:void()">删除</a>
+					</span>
+					</volist>
+					
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="shape" class="col-sm-2 control-label">形状	</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="shape" name="shape" placeholder="形状" value="{$info['shape']}">
+				</div> 
+				<label for="description" class="col-sm-2 control-label">描述	</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="description" name="description" value="{$info['description']}" placeholder="描述">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="angle" class="col-sm-2 control-label">角度	</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="angle" id="angle" name="angle" value="{$info['angle']}" placeholder="角度">
+				</div> 
+				<label for="size" class="col-sm-2 control-label">尺寸	</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="size" name="size" value="{$info['size']}" placeholder="尺寸">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="w_shape" class="col-sm-2 control-label">形状	</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="w_shape" name="w_shape" value="{$info['w_shape']}" placeholder="形状">
+				</div> 
+				<label for="w_description" class="col-sm-2 control-label">描述	</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="w_description" name="w_description" value="{$info['w_description']}" placeholder="描述">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="w_diameter" class="col-sm-2 control-label">直径	</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="w_diameter" name="w_diameter" value="{$info['w_diameter']}" placeholder="直径">
+				</div> 
+				<label for="w_size" class="col-sm-2 control-label">尺寸	</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="w_size" name="w_size" value="{$info['w_size']}" placeholder="尺寸">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registration" class="col-sm-2 control-label">注册证	</label>
+				<div class="col-sm-4">
+					<select id="registration" name="registration" class="form-control">
+					<volist name="zczList" id="zcz">
+						<option d_path="{$zcz.filepath}"  value="{$zcz.title}">{$zcz.title}</option>
+					</volist>
+					</select>
+					<input type="hidden" id="registration_file" name="registration_file">
+				</div> 
+				<label for="qihuo" class="col-sm-2 control-label">期货	</label>
+				<div class="col-sm-4">
+					<input type="checkbox" value="1" id="qihuo" name="qihuo" placeholder="期货" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="notes" class="col-sm-2 control-label">备注	</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="notes" name="notes" value="{$info['notes']}" placeholder="备注">
+				</div>
+			</div>
+		</form> 
+		
+		<div class="modal-footer">
+			<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">关闭</button>
+			<button type="button" class="btn btn-sm btn-info" id="subBtn">保存</button>
+		</div>
+
+		<script>
+			$(function() {  
+				$('#category').change(function(){
+					var val = $(this).val();
+					$.getJSON('/index.php/Home/Product/getCate/pid/'+val,function(obj){
+						var html = '<select name="category2" id="category2" class="form-control">';
+						$.each(obj.d,function(i,d){
+							html += '<option value="'+d.id+'">'+d.title+'</option>';
+						});
+						html += '</select>';
+						$('#subBox').html(html);
+					});
+				});
+				
+				$('#category').change();
+				
+				setTimeout(function(){ $('#category2').val({$info.category2}); },500); 
+				
+				$('#subBtn').click(function() {
+					var imgs = [];
+					$.each($('#imglist_show span'),function(i,d){ imgs.push($(d).attr('d_img')); });
+					$('#image').val(imgs.join('|')); 
+					
+					var options = {
+						url: '/index.php/Home/Product/save',
+						type: 'post',
+						dataType: 'json',
+						success: function(d) {
+							alert(d.m);
+							 if(d.s){
+							 	location.href = '/index.php/Home/Product/index';
+							 }
+						}
+					};
+					$('#ajaxForm').ajaxSubmit(options);
+				});
+				
+				
+				initUploadify({ ID:'fade_img_select',url:"/Home/Product/upload/folder/img",success:function(obj){ 
+				    if(obj.s){
+				      $('#face_img_show').attr('src',obj.d);
+				      $('#face_img').val(obj.d);
+				      $('.face_img_show_box').fadeIn();
+				    }else{
+				      alert(obj.m);
+				    }
+				  } 
+				});
+				
+				
+				$('#registration').change(function(){
+					$('#registration_file').val($("#registration").find("option:selected").attr('d_path'));
+				});
+				$('#registration').change();
+				
+				initUploadify({ ID:'imglist',url:"/Home/Product/upload/folder/img",success:function(obj){ 
+				    if(obj.s){
+				    	var html = '<span d_img="'+obj.d+'" style="background-image:url('+obj.d+');"><a href="javascript:void()">删除</a></span>';
+				      $('#imglist_show').append(html);
+				      $('#face_img').val(obj.d);
+				      $('.imglist_show_box').fadeIn();
+				      $('#imglist_show span a').unbind('click').click(function(){ $(this).parents('span').remove(); });
+				    }else{
+				      alert(obj.m);
+				    }
+				  } 
+				});
+				
+			});
+		</script>
+	</body>
+
+</html>

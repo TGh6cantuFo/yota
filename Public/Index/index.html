@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <title>山东体彩</title>
+        <link rel="stylesheet" href="css/style.css" /> 
+        <script type="text/javascript" src="js/jquery-2.2.0.min.js" ></script>
+    </head>
+</head>
+<body>
+	<div id="body">
+		<div id="indexPage" class="fpage page1" style="display: inone;">
+			<div id="caidai"></div>
+			<img src="img/logo.png" id="logo" />
+			<div id="p1_top">
+				<img class="ab w" src="img/index_t1.png" />
+				<img class="ab w" src="img/index_t2.png" />
+				<img class="ab w" src="img/index_t3.png" />
+			</div>
+			<div id="p1_body">
+				<img class="ab w" src="img/index_1.png" />
+				<img class="ab w" src="img/index_2.png" />
+			</div>
+			<div id="p1_btn">
+				<img id="showInfo" src="img/index_btn1.png" />
+				<img id="showGame" src="img/index_btn2.png" />
+			</div>
+			
+			<div id="activeInfo">
+				<div class="pbody">
+					<img src="img/p2_1.png" class="pt" />
+					<img src="img/p2_bg.png" />
+					<img id="closeActToGame" src="img/p2_btn.png" class="btn" />
+					<img id="closeActInfo" src="img/closeBtn.png" class="close" />
+				</div>
+			</div>
+		</div>
+		<div id="gamePage" class="fpage page2" style="display: none;">
+			<img class="ab w" src="img/p3_ico.png" />
+			<img class="ab w p3title" src="img/p3_title.png" />
+			<div id="p3_body">
+				<img id="gameZP" src="img/p3_zp.png" class="zp" />
+				<img id="gameBtn" src="img/p3_point.png" class="pnt"  />
+			</div>
+			<img class="ab w p3info" src="img/p3_info.png" />
+			
+			<div id="resPage" style="display: none;">
+				<div class="pbody">
+					<img class="w" src="img/p4_card.png" />
+					<img class="ab w" src="img/p4_bg.png" />
+					<img id="resCard" src="img/card_999.png" />
+					<img id="closeGame" src="img/closeBtn.png" class="close" />
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</body>
+<script type="text/javascript" charset="utf-8"> 
+$(function(){
+	$('#showInfo').click(function(){
+		$('#activeInfo').fadeIn();
+	});
+	$('#closeActInfo').click(function(){
+		$('#activeInfo').fadeOut();
+	});
+	$('#closeActToGame').click(function(){
+		$('#activeInfo').fadeOut();
+		$('#indexPage').fadeOut();
+		$('#gamePage').fadeIn();
+	});
+	$('#showGame').click(function(){
+		$('#indexPage').fadeOut();
+		$('#gamePage').fadeIn();
+	});
+	$('#gameBtn').click(function(){
+		$('#gameZP').addClass('move');
+		setTimeout(function(){
+			$('#gameZP').removeClass('move');
+			var st = parseInt(Math.random()*1000)%2;
+			if(st==0){
+				$('#resPage').show();
+			}else{
+				alert('Error');
+			}
+		},1500);
+	});
+	$('#closeGame').click(function(){
+		location.reload();
+	});
+	
+});
+</script>
+    
+    
+</html>

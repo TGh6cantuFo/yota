@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>贝朗医疗</title>
+		<meta charset="utf-8"> 
+		<link href="/Public/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+		<link href="/Public/bootstrap/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="/Public/bootstrap/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/Public/bootstrap/js/bootstrap.min.js"></script>
+		<style type="text/css">
+body{ margin:0px; padding:0px; }
+*,h1,h2,h3,h4,p,a,span,div,input,select,textarea{ font-family:'微软雅黑'; }
+header{ position: relative; position: fixed; left: 250px; right: 0px; height:70px; border-bottom:5px transparent solid; background-color: #f0f0f0; }
+header h2{ margin:0px 20px; padding:0px; font-size:28px; display:inline-block; }
+header a{ font-size:13px; color:#666; }
+header a span{  }
+aside{ position:fixed; bottom: 0px; left:0px; top:0px; width:250px; border-right:5px #f0f0f0 solid; }
+aside .list-group{ border-radius:0px !important; }
+aside .list-group-item{ border: 0px; font-size: 15px; border-radius:0px !important; border-right:0px !important; border-left:0px !important;  }
+aside .list-group-item .glyphicon{ font-size:15px; margin-right:10px; }
+aside .list-group .list-group{ margin-bottom:-1px; border:0px; display:none; }
+aside .list-group .list-group .list-group-item{ padding-left:30px; }
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{ background-color: #f0f0f0 !important; background-image: none !important; color: #00B581 !important; text-shadow: none !important; }
+.media-body .label{ padding:0px 4px !important; font-size:0.5em;}
+footer{ border-top:5px #f0f0f0 solid; line-height:35px; padding:0px 20px; height:10px; position:fixed; bottom:0px; left:0px; width:100%; background-color:#f0f0f0; }
+.media-list{ padding: 5px; background-color: #f4f4f4; margin-bottom: 0px; }
+a.list-group-item.iopen { background-color: #f9f9f9; }
+a.list-group-item:hover{ background-color:#f9f9f9; }
+.leftoper{ border:3px #f0f0f0 solid; border-left:0px; border-right:0px; padding-left:1%;  }
+.leftoper a{ float:left; line-height:40px; display:inline-block; width:24%; margin:3px 1% 3px 0; text-align:center; }
+.cc{  clear:both; }
+.pagepath{ position:fixed; height:39px; border-bottom:1px #00B581 solid; background-color:#61D3B4; left:250px; top:70px; right:0px; }
+.pagepath .breadcrumb{ float:left; line-height:39px; background-color:rgba(0,0,0,0); margin: 0px; padding: 0px 10px; }
+.pagepath .breadcrumb a,.pagepath .breadcrumb li{ color: #fff;}
+.pcontent{ position:fixed; left:250px; top:110px; bottom:40px; right:0px; }
+.pcontent iframe{ width:100%; height:100%; }
+ 
+		</style>
+	</head>
+<body>
+
+<!-- 顶部菜单 Start -->
+<header>
+	<img src="/Public/Home/image/top_left.jpg" />
+	<img src="/Public/Home/image/top_right.jpg" class="pull-right" /> 
+</header>
+<!-- 顶部菜单 End -->
+<!-- 左边菜单 Start -->
+<aside>
+	<img src="/Public/Index/img/logo.png" style="width: 100%;" />
+	<ul class="media-list">
+		<li class="media">
+			<div class="media-left">
+				<a href="#">
+					<img class="media-object" style="width: 45px; height:45px;" src="/Public/Home/image/head.jpg" alt="...">
+				</a>
+			</div>
+			<div class="media-body">
+				<h4 class="media-heading">超级管理员</h4> 
+				<p class="media-body">
+					<a href="/index.php/Home/Public/lgout" class=" pull-right glyphicon glyphicon-dashboard bg-warning">退出</a>
+					<span class="label label-success"><small>lv1</small></span>
+					<span class="label label-info">V</span>
+					<span class="label label-warning">S</span>
+					<span class="label label-danger">V</span>
+				</p>
+			</div>
+		</li>
+	</ul>
+	<div class="cc"></div>  
+	<div class="cc"></div> 
+	<div class="list-group" id="leftmenu">		
+		<a href="/index.php/Home/Category/index" target="mFrame" class="list-group-item active">
+			<span class="glyphicon glyphicon-glass" aria-hidden="true"></span> 器械类别管理
+		</a> 
+		<a href="/index.php/Home/Zhuchezheng/index" target="mFrame" class="list-group-item">
+			<span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 注册证管理
+		</a> 
+		<a href="/index.php/Home/Ziyuan/index" target="mFrame" class="list-group-item">
+			<span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 推广工具管理
+		</a>  
+		<a href="/index.php/Home/Product/index" target="mFrame" class="list-group-item">
+			<span class="glyphicon glyphicon-glass" aria-hidden="true"></span> 器械字典管理
+		</a> 
+		<a href="/index.php/Home/Keshi/index" target="mFrame"  class="list-group-item">
+			<span class="glyphicon glyphicon-music" aria-hidden="true"></span> 科室管理
+		</a>  
+		<a href="/index.php/Home/Package/index" target="mFrame"  class="list-group-item">
+			<span class="glyphicon glyphicon-music" aria-hidden="true"></span> 术式盒管理
+		</a> 
+		<a href="/index.php/Home/Distributor/index" target="mFrame" class="list-group-item">
+			<span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 用户信息管理
+		</a> 
+		<a href="/index.php/Home/Order/index" target="mFrame" class="list-group-item">
+			<span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 订单管理
+		</a> 
+		<a href="/index.php/Home/Setting/index" target="mFrame" class="list-group-item">
+			<span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 系统设置
+		</a> 
+	</div>
+</aside>
+<!-- 左边菜单 End -->
+<!-- 页面导航 Start -->
+<div class="pagepath">
+	<ol class="breadcrumb">
+	  <li><a><span class="glyphicon glyphicon-home"></span> &nbsp;</a></li>
+	  <!--<li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+	  <li><a href="#"><span class="glyphicon glyphicon-eye-close"></span> Library</a></li>
+	  <li class="active"><span class="glyphicon glyphicon-bullhorn"></span> Data</li>-->
+	</ol>
+</div>
+<!-- 页面导航 End -->
+<!-- 主页面 Start -->
+<div class="pcontent">
+	<iframe id="mFrame" name="mFrame" frameborder="0" src="/index.php/Home/Category/index"></iframe>
+</div>
+<!-- 主页面 End -->
+<!-- 页面底部 Start -->
+<footer>
+	<div>V1.0</div>
+</footer>
+
+</body>
+
+<script language="javascript">
+$(function(){
+	 $('#leftmenu a').click(function(){
+	 	//if($(this).hasClass('active')) return false;
+	 	$('#leftmenu a.active').removeClass('active');
+	 	$(this).addClass('active');
+	 });
+});
+</script>
+</html>
