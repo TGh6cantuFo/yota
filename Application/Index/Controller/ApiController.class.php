@@ -24,7 +24,7 @@ class ApiController extends Controller{
 			$state = $rurl;
 		}
 		$url = $this->WX->getOauthRedirect($this->callback,$state,'snsapi_userinfo');
-		P($url);
+		//P($url);
 		header('location:'.$url);
 	}
 	
@@ -113,7 +113,7 @@ class ApiController extends Controller{
 	* @return
 	*/
 	public function orderList(){
-		$limt = I('get.count');
+		$limt = I('get.count',10);
 		$list = M('Score')->order('score desc')->limit($limt)->select();
 		_Ajax(true,' data list Success ',$list);
 	}
