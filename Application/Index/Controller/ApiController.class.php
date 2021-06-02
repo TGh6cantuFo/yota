@@ -5,7 +5,7 @@ use Org\Util\Wechat;
 
 class ApiController extends Controller{
 	private $WX = NULL;
-	private $callback = '';
+	private $callback = 'http://wx.zhijin101.com/index.php/Index/Api/oauthback';
 	public function _initialize(){
 		header("Access-Control-Allow-Origin:*");
 		header("Access-Control-Allow-Headers:X-Requested-With"); 
