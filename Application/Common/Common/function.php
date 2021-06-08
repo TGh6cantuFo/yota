@@ -1,6 +1,9 @@
 <?php
 
 function _Ajax($status=true,$message="Success",$data=array()){
+	header("Access-Control-Allow-Origin:*");
+	header("Access-Control-Allow-Headers:X-Requested-With"); 
+	header('Content-type: application/json');
 	exit(json_encode(array(
 		's'	=>	$status,
 		'm'	=>	$message,

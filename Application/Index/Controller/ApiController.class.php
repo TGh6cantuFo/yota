@@ -7,8 +7,7 @@ class ApiController extends Controller{
 	private $WX = NULL;
 	private $callback = 'http://wx.zhijin101.com/index.php/Index/Api/oauthback';
 	public function _initialize(){
-		header("Access-Control-Allow-Origin:*");
-		header("Access-Control-Allow-Headers:X-Requested-With"); 
+		
 		$conf = C('wechat'); 
 		$this->WX = new Wechat($conf);
 	}
