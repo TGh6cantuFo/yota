@@ -34,6 +34,7 @@ class ApiController extends Controller{
 	public function oauthback(){
 		$state = $_GET['state'];
 		$dat = $this->WX->getOauthAccessToken();
+		P($dat);
 		if(!empty($dat['data'])){
 			$userinfo = $this->WX->getOauthUserinfo($dat['access_token'],$dat['openid']);
 			if(!empty($userinfo)){
